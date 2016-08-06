@@ -10,17 +10,17 @@ import java.util.Date;
 @Entity
 public class Customer {
     @Id @GeneratedValue private Long id;
-    private Date created_at;
+    private Date creationDate;
     private String name;
 
     Customer() {} // Jpa only
     public Customer(String name) {
-        this.created_at = new Date();
+        this.creationDate = new Date();
 
         this.name = name;
     }
 
-    public void setCreationDate(Date date) {
-        this.created_at = date;
+    public boolean isValid() {
+        return name != null;
     }
 }

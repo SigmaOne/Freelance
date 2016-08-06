@@ -10,7 +10,7 @@ import java.util.Date;
 @Entity
 public class CustomerData {
     private @Id @GeneratedValue Long id;
-    private Date created_at;
+    private Date creationDate;
     private String phrase;
     private String website;
     private String regions;
@@ -22,7 +22,7 @@ public class CustomerData {
 
     private CustomerData() {}
     public CustomerData(String phrase, String website, String regions, String marginality, String closeConversation, String websiteConversation, String plannedProfit, String averagePrice) {
-        this.created_at = new Date();
+        this.creationDate = new Date();
 
         this.phrase = phrase;
         this.website = website;
@@ -34,7 +34,9 @@ public class CustomerData {
         this.averagePrice = averagePrice;
     }
 
-    public void setCreationDate(Date date) {
-        this.created_at = date;
+    public boolean isValid() {
+        // There's no averagePrice, coz it's optional
+        return phrase != null && website != null && regions != null && marginality != null &&
+                closeConversation != null && websiteConversation != null && plannedProfit != null;
     }
 }
