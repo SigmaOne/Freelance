@@ -11,7 +11,6 @@ import java.util.Date;
 public class CustomerData {
     private @Id @GeneratedValue Long id;
     private Date created_at;
-
     private String phrase;
     private String website;
     private String regions;
@@ -33,5 +32,9 @@ public class CustomerData {
         this.websiteConversation = websiteConversation;
         this.plannedProfit = plannedProfit;
         this.averagePrice = averagePrice;
+    }
+
+    public void setCreationDate(Date date) {
+        this.created_at = date;
     }
 }

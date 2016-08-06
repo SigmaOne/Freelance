@@ -17,6 +17,7 @@ public class DatabaseLoader implements CommandLineRunner {
         this.dataRepository = dataRepository;
     }
 
+    // Use this method to preload some entities
     @Override
     public void run(String... strings) throws Exception {
         this.customerRepository.save(new Customer("Customer1"));

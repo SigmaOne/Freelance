@@ -12,6 +12,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.Date;
 
 @Controller
 public class CustomerController {
@@ -29,7 +30,7 @@ public class CustomerController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public void postLogin(/*@ModelAttribute(value = "user") User user, */HttpServletResponse response) throws IOException {
+    public void postLogin(@ModelAttribute(value = "user") User user, HttpServletResponse response) throws IOException {
         File file = new File("/home/sigma/Furnace/test.xls");
 
         response.setContentLength((int)file.length());
@@ -41,17 +42,27 @@ public class CustomerController {
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
 
-    @RequestMapping(value = "/checkAccess", method = RequestMethod.POST)
+    @RequestMapping(value = "/checkAccess", method = RequestMethod.POST, headers = {"Content-type=application/json"})
     @ResponseBody
-    public String postCustomer(@ModelAttribute Customer customer) {
-        // Save customer
+    public String postCustomer(@RequestBody Customer customer) {
+        // Todo: refactor those 2 lanes
+        customer.setCreationDate(new Date());
+        customerRepository.save(customer);
+
         return "{ access: true }";
     }
 
     @RequestMapping(value = "/checkData", method = RequestMethod.POST)
     @ResponseBody
     public String postData(@ModelAttribute CustomerData data) {
-        // Save data
+        // Todo: refactor those 2 lanes
+        data.setCreationDate(new Date());
+        dataRepository.save(data);
+
         return "{ access: true }";
+    }
+
+    private String CreateXlsFromAllEntities() {
+        return "";
     }
 }

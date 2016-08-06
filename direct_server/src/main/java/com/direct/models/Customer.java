@@ -11,13 +11,16 @@ import java.util.Date;
 public class Customer {
     @Id @GeneratedValue private Long id;
     private Date created_at;
-
     private String name;
 
-    private Customer() {}
+    Customer() {} // Jpa only
     public Customer(String name) {
         this.created_at = new Date();
 
         this.name = name;
+    }
+
+    public void setCreationDate(Date date) {
+        this.created_at = date;
     }
 }
