@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import lombok.Data;
 import java.util.Date;
 
-@Data    // lombok's annotation which hides all the JPA's manual annotations
+@Data
 @Entity
 public class CustomerData {
     private @Id @GeneratedValue Long id;
