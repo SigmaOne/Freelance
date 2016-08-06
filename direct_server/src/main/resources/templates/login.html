@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login in to retrieve data in xls</h1>
+    <form action="#" th:action="@{/login}" th:object="${user}" method="post">
+        <label>
+            Name:
+            <input type="text" th:field="*{name}"/>
+        </label>
+        <br/>
+
+        <label>
+            Password:
+            <input type="text" th:field="*{password}"/>
+        </label>
+        <br/>
+
+        <input type="submit" />
+    </form>
+</body>
+</html>
