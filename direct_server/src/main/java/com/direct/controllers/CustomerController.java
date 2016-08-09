@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Date;
-import java.util.Map;
 
 @Controller
 public class CustomerController {
