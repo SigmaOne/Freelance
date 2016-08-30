@@ -42,6 +42,8 @@ public class MainController {
     }
 
     private boolean isAdmin(User user) {
-        return user.getName().equals(System.getenv("DIRECT_ADMIN_NAME")) && user.getPassword().equals(System.getenv("DIRECT_ADMIN_PASSWORD"));
+	System.out.println(System.getProperty("DIRECT_ADMIN_NAME"));
+	System.out.println(System.getProperty("DIRECT_ADMIN_PASSWORD"));
+        return user.getName().equals(System.getProperty("DIRECT_ADMIN_NAME")) && user.getPassword().equals(System.getProperty("DIRECT_ADMIN_PASSWORD"));
     }
 }
