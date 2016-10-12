@@ -2,6 +2,7 @@ package com.direct.models;
 
 import com.direct.models.repositories.CustomerDataRepository;
 import com.direct.models.repositories.CustomerRepository;
+import com.google.common.collect.Lists;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -11,10 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class XlsCreator {
-    @Autowired
-    private CustomerRepository customerRepository;
-    @Autowired
-    private CustomerDataRepository dataRepository;
+    @Autowired private CustomerRepository customerRepository;
+    @Autowired private CustomerDataRepository dataRepository;
 
     public HSSFWorkbook createXlsWithAllEntities() {
         HSSFWorkbook workbook = new HSSFWorkbook();
@@ -33,12 +32,12 @@ public class XlsCreator {
         int columnCounter = 0;
         HSSFRow rowHead = customerSheet.createRow(rowCounter++);
         Field[] fields = Customer.class.getDeclaredFields();
-        for (Field field : fields)
+        for (Field field: fields)
             rowHead.createCell(columnCounter++).setCellValue(field.getName());
 
         // write data rows
         ArrayList<Customer> customers = (ArrayList<Customer>) customerRepository.findAll();
-        for(Customer customer: customers) {
+        for(Customer customer: Lists.reverse(customers)) { // Todo: move reverse logic to repository
             HSSFRow row = customerSheet.createRow(rowCounter++);
 
             columnCounter = 0;
@@ -55,12 +54,12 @@ public class XlsCreator {
         int columnCounter = 0;
         HSSFRow rowHead = customerSheet.createRow(rowCounter++);
         Field[] fields = CustomerData.class.getDeclaredFields();
-        for (Field field : fields)
+        for (Field field: fields)
             rowHead.createCell(columnCounter++).setCellValue(field.getName());
 
         // write data rows
         ArrayList<CustomerData> dataList = (ArrayList<CustomerData>) dataRepository.findAll();
-        for(CustomerData data: dataList) {
+        for(CustomerData data: Lists.reverse(dataList)) {   // Todo: moce reverse logic to repository
             HSSFRow row = customerSheet.createRow(rowCounter++);
 
             columnCounter = 0;

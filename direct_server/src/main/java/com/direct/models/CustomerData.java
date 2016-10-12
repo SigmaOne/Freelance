@@ -1,13 +1,12 @@
 package com.direct.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import lombok.Data;
+import javax.persistence.*;
 import java.util.Date;
+import lombok.Data;
 
 @Data
 @Entity
+@Table(name = "customer_data")
 public class CustomerData {
     private @Id @GeneratedValue Long id;
     private Date creationDate;
@@ -21,6 +20,7 @@ public class CustomerData {
     private String plannedProfit;
 
     private CustomerData() {}
+
     public CustomerData(String phrase, String website, String regions, String marginality, String closeConversation, String websiteConversation, String plannedProfit, String averagePrice) {
         this.creationDate = new Date();
 
